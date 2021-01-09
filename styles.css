@@ -1,0 +1,93 @@
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root{
+  --color : white;
+  --background-color: rgb(44, 44, 44);
+}
+.darkMode{
+  background-color: var(--background-color);
+  color: var(--color);
+}
+
+body {
+ 
+}
+.activeBox:hover{
+  cursor: pointer;
+  background-color: dimgray;
+  color: white;
+  transition: 0.5s;
+}
+
+
+header {
+}
+
+
+#clock {
+  font-size: x-large;
+  border: solid 5px grey;
+  border-radius: 10px;
+  margin-top: 5px;
+  width: 400px;
+  display: flex;
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+
+  -webkit-box-shadow: -59px 56px 63px 28px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: -59px 56px 63px 28px rgba(0, 0, 0, 0.25);
+  box-shadow: -59px 56px 63px 28px rgba(0, 0, 0, 0.25);
+}
+.clockBox {
+  font-family: "Poiret One", cursive;
+  padding: 10px;
+  font-weight: 900;
+}
+
+.headerBox {
+  padding: 20px;
+  margin-top: 20px;
+  width: 400px;
+  font-family: "Poiret One", cursive;
+  font-weight: 900;
+  font-size: x-large;
+  text-align: center;
+  display: flex;
+  border: solid 5px grey;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.divBox {
+  padding: 20px;
+  margin-top: 20px;
+  width: 400px;
+  font-family: "Poiret One", cursive;
+  font-weight: 900;
+  font-size: x-large;
+  border: solid 5px grey;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.buttBox{
+  background-color: greenyellow;
+  font-family: "Poiret One", cursive;
+  font-size: large;
+  font-weight: 900;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 7px;
+}
+.buttBox:hover{
+  cursor: pointer;
+  background-color: forestgreen;
+  transition: 0.5s;
+}
+#timerBox{
+  font-size: xx-large;
+}
