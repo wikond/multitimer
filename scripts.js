@@ -30,23 +30,24 @@ function Timer(startTimeStamp) {
         headerEl.placeholder = 'Timer Name';
         headerEl.rows = 1;
         headerEl.cols = 12;
-        divEl.classList.add('col-sm-8', 'col-12', 'col-md-4', 'col-lg-3', 'col-xxl-2', 'm-2', 'border', 'rounded', 'align-content-center', 'text-center');
+        divEl.classList.add('col-sm-8', 'col-12', 'col-md-4', 'col-lg-3', 'col-xxl-2', 'm-2', 'border', 'rounded', 'align-content-center', 'text-center', 'glow');
         divEl.id = this.timeStampID + 'divBox';
-        div1El.classList.add('row', 'm-2');
-        div2El.classList.add('row', 'clockBox');
-        //div3El.classList.add('row');
+        div1El.classList.add('row', 'm-2', 'mt-3');
+        div2El.classList.add('row', 'clockBox', 'mt-3');
+        div3El.classList.add('mt-3');
         timeEl.classList.add('display-6', 'col', 'text-center');
         timeEl.id = this.timeStampID;
-        buttStart.classList.add('btn', 'btn-secondary', 'm-2');
+        buttStart.classList.add('btn', 'btn-secondary', 'me-1', 'mb-3');
         buttStart.id = 'buttStart' + this.timeStampID;
-        buttPause.classList.add('btn', 'btn-secondary', 'm-2');
+        buttPause.classList.add('btn', 'btn-secondary', 'me-1', 'mb-3');
         buttPause.id = 'buttPause' + this.timeStampID;
-        buttStop.classList.add('btn', 'btn-secondary', 'm-2');
+        buttStop.classList.add('btn', 'btn-secondary', 'mb-3');
         buttStop.id = 'buttStop' + this.timeStampID;
 
 
         divEl.appendChild(div1El);
         divEl.appendChild(div2El);
+        divEl.appendChild(div3El);
 
         //divEl.appendChild(div3El);
 
@@ -58,9 +59,9 @@ function Timer(startTimeStamp) {
         timerNumbers(this.timeStampID, this.startTimeStamp);
         div2El.appendChild(timeEl);
         divEl.appendChild(buttDivEl);
-        buttDivEl.appendChild(buttStart);
-        buttDivEl.appendChild(buttPause); //to be programmed
-        buttDivEl.appendChild(buttStop);
+        div3El.appendChild(buttStart);
+        div3El.appendChild(buttPause);
+        div3El.appendChild(buttStop);
         buttStart.innerText = 'Start';
         buttPause.innerText = 'Pause';
         buttStop.innerText = 'Stop';
@@ -200,8 +201,8 @@ const prepareConmtainer = () => {
     let containerContent = `    
         <div id="clock" class="row ">
             <div class="col-12  text-end clockBox">
-            <span id="date" class="display-6  me-2 "></span>
-            <span id="time" class="display-6  me-2 text-end"></span>
+            <span id="date" class="me-2 "></span>
+            <span id="time" class="me-4 text-end"></span>
             </div>
         </div>
         <div class="row align-items-center justify-content-center">

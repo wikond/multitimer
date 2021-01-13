@@ -28,12 +28,19 @@ body {
 }
 .clockBox {
   font-family: 'Roboto Mono', monospace;
+  font-size: x-large;
 }
 
 .timerHeader{
   background-color: var(--background-color);
   color: var(--color);
   font-size: x-large;
+}
+
+.glow{
+  -moz-box-shadow: 5px 5px 15px rgba(5, 190, 40, 0.5);
+-webkit-box-shadow: 5px 5px 15px rgba(5, 190, 40, 0.5);
+box-shadow: 5px 5px 15px rgba(5, 190, 40, 0.5);
 }
 
 .divBox {
