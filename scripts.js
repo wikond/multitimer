@@ -6,7 +6,7 @@ function Timer(startTimeStamp) {
     this.timerInt = null;
     this.status = 0;
     this.displayTimer = () => {
-        let mainEl = document.querySelector('#container');
+        let mainEl = document.querySelector('#timers');
         let divEl = document.createElement('div');
         let timerEl = document.createElement('div');
         let clockEl = document.getElementById('clock');
@@ -21,14 +21,14 @@ function Timer(startTimeStamp) {
         timeEl.classList.add('clockBox')
         //dateEl.classList.add('clockBox')
         //dateEl.id = 'date';
-        divEl.classList.add('divBox');
+        divEl.classList.add('divBox', 'col-2', 'm-2','align-self-center');
         divEl.id = this.timeStampID + 'divBox';
         timeEl.id = this.timeStampID;
-        buttStart.classList.add('buttBox');
+        buttStart.classList.add('btn',  'btn-secondary','m-2');
         buttStart.id = 'buttStart' + this.timeStampID;
-        buttPause.classList.add('buttBox');
+        buttPause.classList.add('btn',  'btn-secondary','m-2');
         buttPause.id = 'buttPause' + this.timeStampID;
-        buttStop.classList.add('buttBox');
+        buttStop.classList.add('btn',  'btn-secondary','m-2');
         buttStop.id = 'buttStop' + this.timeStampID;
 
         clockEl.appendChild(timeEl);
@@ -40,7 +40,7 @@ function Timer(startTimeStamp) {
         divEl.appendChild(timeEl);
         divEl.appendChild(buttDivEl);
         buttDivEl.appendChild(buttStart);
-        buttDivEl.appendChild(buttPause);
+        //buttDivEl.appendChild(buttPause); //to be programmed
         buttDivEl.appendChild(buttStop);
         buttStart.innerText = 'Start';
         buttPause.innerText = 'Pause';
