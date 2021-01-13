@@ -24,22 +24,17 @@ body {
 }
 
 #clock {
-  font-size: x-large;
-  border: solid 5px grey;
-  border-radius: 10px;
-  width: 400px;
-  display: flex;
-  height: 80px;
-  display: flex;
-  justify-content: space-around;
+  
 }
 .clockBox {
-  font-family: "Poiret One", cursive;
-  padding: 10px;
-  font-weight: 900;
+  font-family: 'Roboto Mono', monospace;
 }
 
-
+.timerHeader{
+  background-color: var(--background-color);
+  color: var(--color);
+  font-size: x-large;
+}
 
 .divBox {
   font-family: "Poiret One", cursive;

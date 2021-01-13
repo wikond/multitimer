@@ -3,44 +3,63 @@ function Timer(startTimeStamp) {
     this.startTimeStamp = startTimeStamp;
     this.pauseTimeStamp = startTimeStamp;
     this.stopTimeStamp = startTimeStamp;
+    this.timeStamp = startTimeStamp;
     this.timerInt = null;
     this.status = 0;
     this.displayTimer = () => {
         let mainEl = document.querySelector('#timers');
         let divEl = document.createElement('div');
         let timerEl = document.createElement('div');
+        let headerEl = document.createElement('textarea');
+
         let clockEl = document.getElementById('clock');
         let timeEl = document.createElement('div');
         let dateEl = document.createElement('div');
+        let div1El = document.createElement('div');
+        let div2El = document.createElement('div');
+        let div3El = document.createElement('div');
         let buttDivEl = document.createElement('div');
         let buttStart = document.createElement('button');
         let buttPause = document.createElement('button');
         let buttStop = document.createElement('button');
         let timeDate;
 
-        timeEl.classList.add('clockBox')
         //dateEl.classList.add('clockBox')
         //dateEl.id = 'date';
-        divEl.classList.add('divBox', 'col-2', 'm-2','align-self-center');
+        headerEl.classList.add('timerHeader', 'text-center');
+        headerEl.placeholder = 'Timer Name';
+        headerEl.rows = 1;
+        headerEl.cols = 12;
+        divEl.classList.add('col-sm-8', 'col-12', 'col-md-4', 'col-lg-3', 'col-xxl-2', 'm-2', 'border', 'rounded', 'align-content-center', 'text-center');
         divEl.id = this.timeStampID + 'divBox';
+        div1El.classList.add('row', 'm-2');
+        div2El.classList.add('row', 'clockBox');
+        //div3El.classList.add('row');
+        timeEl.classList.add('display-6', 'col', 'text-center');
         timeEl.id = this.timeStampID;
-        buttStart.classList.add('btn',  'btn-secondary','m-2');
+        buttStart.classList.add('btn', 'btn-secondary', 'm-2');
         buttStart.id = 'buttStart' + this.timeStampID;
-        buttPause.classList.add('btn',  'btn-secondary','m-2');
+        buttPause.classList.add('btn', 'btn-secondary', 'm-2');
         buttPause.id = 'buttPause' + this.timeStampID;
-        buttStop.classList.add('btn',  'btn-secondary','m-2');
+        buttStop.classList.add('btn', 'btn-secondary', 'm-2');
         buttStop.id = 'buttStop' + this.timeStampID;
 
+
+        divEl.appendChild(div1El);
+        divEl.appendChild(div2El);
+
+        //divEl.appendChild(div3El);
+
+        div1El.appendChild(headerEl);
         clockEl.appendChild(timeEl);
         clockEl.appendChild(dateEl);
         mainEl.appendChild(divEl);
-        divEl.innerText = "Timer";
         //timerEl.innerText = timerNumbers(timerEl, this.startTimeStamp);
         timerNumbers(this.timeStampID, this.startTimeStamp);
-        divEl.appendChild(timeEl);
+        div2El.appendChild(timeEl);
         divEl.appendChild(buttDivEl);
         buttDivEl.appendChild(buttStart);
-        //buttDivEl.appendChild(buttPause); //to be programmed
+        buttDivEl.appendChild(buttPause); //to be programmed
         buttDivEl.appendChild(buttStop);
         buttStart.innerText = 'Start';
         buttPause.innerText = 'Pause';
@@ -51,21 +70,22 @@ function Timer(startTimeStamp) {
     }
     this.startTimer = () => {
         let timerDate = new Date();
-        console.log('start');
         if (this.status == 0) this.startTimeStamp = timerDate.getTime();
+        if (this.status == 2) this.startTimeStamp = timerDate.getTime() - this.pauseTimeStamp;
+
         if (this.status !== 1) this.timerInt = setInterval(() => {
-            this.pauseTimeStamp = timerNumbers(this.timeStampID, this.startTimeStamp);
+            this.timeStamp = timerNumbers(this.timeStampID, this.startTimeStamp);
         }, 100);
         this.status = 1;
     }
     this.pauseTimer = () => {
-        this.status = 2;
-        console.log('pause');
+        let timerDate = new Date();
+        if (this.status !== 2) this.pauseTimeStamp = timerDate.getTime() - this.startTimeStamp;
+        if (this.status !== 0) this.status = 2;
         clearInterval(this.timerInt);
     }
     this.stopTimer = () => {
         this.status = 0;
-        console.log('stop');
         clearInterval(this.timerInt);
     }
 
@@ -120,6 +140,7 @@ const displayTimer = () => {
     timeEl.id = 'time';
     dateEl.id = 'date';
     divEl.classList.add('divBox');
+    //divEl.classList.add('col-3');
     timerEl.id = 'timerBox';
     buttStart.classList.add('buttBox');
     buttPause.classList.add('buttBox');
@@ -159,7 +180,6 @@ const addTimer = (e) => {
     currentDate = new Date();
     newTimer = new Timer(currentDate.getTime());
     $timers.push(newTimer);
-    console.log($timers)
     $timers[$timers.length - 1].displayTimer();
 }
 
@@ -175,7 +195,64 @@ const prepareDOMEvents = () => {
     newTimer.addEventListener('click', addTimer);
 }
 
+const prepareConmtainer = () => {
+    let containerEl = document.getElementById('container');
+    let containerContent = `    
+        <div id="clock" class="row ">
+            <div class="col-12  text-end clockBox">
+            <span id="date" class="display-6  me-2 "></span>
+            <span id="time" class="display-6  me-2 text-end"></span>
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-center">
+            <div class="col text-center">
+            <span class="display-4">MULTI-TIMER</span>
+            </div>
+        </div>
+
+        <div class="row align-items-center justify-content-center" id="buttons">
+            <div class="col text-center">
+            <button type="button" id="darkLight" class="btn  m-2 btn-secondary "> Dark/Light</button>
+            <button type="button" id="addTimer" class="btn  m-2 btn-secondary "> Add Timer</button>
+            </div>
+
+        </div>
+        <div class="row m-2  justify-content-center align-items-center text-center" id="timers">
+
+        </div>`;
+    containerEl.innerHTML = containerContent;
+
+}
+
+function clockDisplay() {
+    let date = new Date();
+    let clockHour = date.getHours(); // 0 - 23
+    let clockMinute = date.getMinutes(); // 0 - 59
+    let clockSecond = date.getSeconds(); // 0 - 59
+    let dateYear = date.getFullYear();
+    let dateMonth = date.getMonth() + 1;
+    let dateDay = date.getUTCDay();
+
+
+    if (clockHour < 10) clockHour = "0" + clockHour;
+    if (clockMinute < 10) clockMinute = "0" + clockMinute;
+    if (clockSecond < 10) clockSecond = "0" + clockSecond;
+    if (dateDay < 10) dateDay = "0" + dateDay;
+    if (dateMonth < 10) dateMonth = "0" + dateMonth;
+
+    let clockTime = clockHour + ":" + clockMinute + ":" + clockSecond + " ";
+    let clockDate = dateYear + "/" + dateMonth + "/" + dateDay + "  ";
+    document.getElementById("date").innerText = clockDate;
+    document.getElementById("time").innerText = clockTime;
+    //document.getElementById("clock").textContent = clockDate + clockTime;
+
+    setTimeout(clockDisplay, 1000);
+}
+
+
 const main = () => {
+    prepareConmtainer();
+    clockDisplay();
     addTimer();
     //displayTimer();
     darkLight()
